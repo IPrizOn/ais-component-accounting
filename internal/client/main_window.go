@@ -115,7 +115,7 @@ func loadTabComponents() *fyne.Container {
 	dataTable.SetColumnWidth(3, 200)
 	dataTable.SetColumnWidth(4, 200)
 
-	box := container.NewHBox(layout.NewSpacer(), widget.NewLabel("СПИСОК КОМПЛЕКТУЮЩИХ"), layout.NewSpacer())
+	box := container.NewHBox(widget.NewLabel("СПИСОК КОМПЛЕКТУЮЩИХ"), layout.NewSpacer(), widget.NewButton("Добавить комплеткующее", func() {}))
 
 	container := layout.NewBorderLayout(box, buttonBack, nil, nil)
 
@@ -210,7 +210,7 @@ func loadTabCustomers() *fyne.Container {
 	dataTable.SetColumnWidth(4, 200)
 	dataTable.SetColumnWidth(5, 200)
 
-	box := container.NewHBox(layout.NewSpacer(), widget.NewLabel("СПИСОК КЛИЕНТОВ"), layout.NewSpacer())
+	box := container.NewHBox(widget.NewLabel("СПИСОК КЛИЕНТОВ"), layout.NewSpacer(), widget.NewButton("Добавить клиента", func() {}))
 
 	container := layout.NewBorderLayout(box, buttonBack, nil, nil)
 
@@ -300,7 +300,7 @@ func loadTabSales() *fyne.Container {
 	dataTable.SetColumnWidth(3, 200)
 	dataTable.SetColumnWidth(4, 200)
 
-	box := container.NewHBox(layout.NewSpacer(), widget.NewLabel("СПИСОК ПРОДАЖ"), layout.NewSpacer())
+	box := container.NewHBox(widget.NewLabel("СПИСОК ПРОДАЖ"), layout.NewSpacer(), widget.NewButton("Добавить продажу", func() {}))
 
 	container := layout.NewBorderLayout(box, buttonBack, nil, nil)
 
