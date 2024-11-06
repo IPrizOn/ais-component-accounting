@@ -4,33 +4,40 @@ import (
 	"ais/internal/client"
 	"context"
 	"log"
+	"sync"
 
 	"github.com/jackc/pgx/v5"
 )
 
+var (
+	conn *pgx.Conn
+	once sync.Once
+)
+
 func main() {
-	conn, err := connectDB()
-	if err != nil {
-		log.Panic(err)
-	}
+	connection := GetInstanceConnect()
 
 	defer func() {
-		err := conn.Close(context.Background())
+		err := connection.Close(context.Background())
 		if err != nil {
 			log.Panic(err)
 		}
 	}()
 
-	client.Start(conn)
+	client.Start(connection)
 }
 
-func connectDB() (*pgx.Conn, error) {
+func GetInstanceConnect() *pgx.Conn {
 	connectionString := "postgresql://postgres:13799731@localhost:5432/accounting_components?sslmode=disable"
 
-	conn, err := pgx.Connect(context.Background(), connectionString)
-	if err != nil {
-		log.Panic(err)
-	}
+	once.Do(func() {
+		var err error
 
-	return conn, nil
+		conn, err = pgx.Connect(context.Background(), connectionString)
+		if err != nil {
+			log.Panic(err)
+		}
+	})
+
+	return conn
 }

@@ -1,17 +1,40 @@
 package database
 
 import (
+	"context"
+
 	"github.com/jackc/pgx/v5"
 )
 
-func UpdateComponent(*pgx.Conn) error {
+func UpdateComponent(conn *pgx.Conn) error {
+	query := ``
+
+	_, err := conn.Exec(context.Background(), query)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
-func UpdateCustomer(*pgx.Conn) error {
+func UpdateCustomer(conn *pgx.Conn) error {
+	query := ``
+
+	_, err := conn.Exec(context.Background(), query)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
-func UpdateSale(*pgx.Conn) error {
+func UpdateSale(conn *pgx.Conn) error {
+	query := ``
+
+	_, err := conn.Exec(context.Background(), query)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

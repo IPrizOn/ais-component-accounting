@@ -9,7 +9,7 @@ import (
 
 func GetComponentsList(conn *pgx.Conn) ([]domain.Component, error) {
 	query := `SELECT * 
-				FROM component`
+				FROM component;`
 
 	rows, err := conn.Query(context.Background(), query)
 	if err != nil {
@@ -37,7 +37,7 @@ func GetComponentsList(conn *pgx.Conn) ([]domain.Component, error) {
 
 func GetCustomersList(conn *pgx.Conn) ([]domain.Customer, error) {
 	query := `SELECT *
-				FROM customer`
+				FROM customer;`
 
 	rows, err := conn.Query(context.Background(), query)
 	if err != nil {
@@ -65,7 +65,7 @@ func GetCustomersList(conn *pgx.Conn) ([]domain.Customer, error) {
 
 func GetSalesList(conn *pgx.Conn) ([]domain.Sale, error) {
 	query := `SELECT *
-				FROM sale`
+				FROM sale;`
 
 	rows, err := conn.Query(context.Background(), query)
 	if err != nil {
@@ -92,11 +92,29 @@ func GetSalesList(conn *pgx.Conn) ([]domain.Sale, error) {
 }
 
 func GetPersonsList(conn *pgx.Conn) ([]domain.Person, error) {
+	query := `SELECT *
+				FROM person;`
 
-	return nil, nil
-}
+	rows, err := conn.Query(context.Background(), query)
+	if err != nil {
+		return nil, err
+	}
 
-func IsUserExist(conn *pgx.Conn) error {
+	defer rows.Close()
 
-	return nil
+	var (
+		personsList []domain.Person
+		person      domain.Person
+	)
+
+	for rows.Next() {
+		err = rows.Scan(&person.ID, &person.Login, &person.Password, &person.Role)
+		if err != nil {
+			return nil, err
+		}
+
+		personsList = append(personsList, person)
+	}
+
+	return personsList, nil
 }

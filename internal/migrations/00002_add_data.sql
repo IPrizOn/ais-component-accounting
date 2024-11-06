@@ -1,7 +1,7 @@
 -- +goose Up
 INSERT INTO person (login, password, role) VALUES
-('admin', '1234', 'admin'),
-('prizon', '1379', 'common');
+('admin', '12345', 'admin'),
+('user', '1111', 'common');
 
 INSERT INTO component (type, description, price) VALUES
 ('processor', 'amd ryzen 5 7600', 15000.0),

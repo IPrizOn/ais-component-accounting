@@ -10,18 +10,20 @@ var (
 	windowMain fyne.Window
 	AppFyne    fyne.App
 
-	connection *pgx.Conn
+	conn *pgx.Conn
 )
 
-func Start(conn *pgx.Conn) {
-	connection = conn
+func Start(connection *pgx.Conn) {
+	conn = connection
 
 	AppFyne = app.New()
+
 	windowMain = AppFyne.NewWindow("")
 
-	openAuthWindow()
+	openWindowAuth()
 
 	windowMain.Show()
 	windowMain.SetMaster()
+
 	AppFyne.Run()
 }

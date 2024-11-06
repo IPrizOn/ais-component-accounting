@@ -16,11 +16,11 @@ var (
 	buttonBack *widget.Button
 )
 
-func openMainWindow() {
+func openWindowMain() {
 	windowMain.SetTitle("Учёт комплектующих")
 
 	buttonBack = widget.NewButton("Выход", func() {
-		openAuthWindow()
+		openWindowAuth()
 	})
 
 	contentComponents := loadTabComponents()
@@ -40,7 +40,7 @@ func openMainWindow() {
 }
 
 func loadTabComponents() *fyne.Container {
-	componentsList, err := database.GetComponentsList(connection)
+	componentsList, err := database.GetComponentsList(conn)
 	if err != nil {
 		log.Println(err)
 	}
@@ -53,24 +53,7 @@ func loadTabComponents() *fyne.Container {
 		func() fyne.CanvasObject {
 			return container.NewStack(
 				widget.NewLabel("data"),
-
-				container.NewHBox(
-					widget.NewButton("Изменить", func() {
-						if userRole != "common" {
-
-						} else {
-							openDialogWindow()
-						}
-					}),
-
-					widget.NewButton("Удалить", func() {
-						if userRole != "common" {
-
-						} else {
-							openDialogWindow()
-						}
-					}),
-				),
+				container.NewHBox(),
 			)
 		},
 
@@ -90,9 +73,27 @@ func loadTabComponents() *fyne.Container {
 			} else if tci.Col == 4 {
 				label.Hide()
 				buttonsContainer.Show()
+
+				co.(*fyne.Container).Objects[1] = container.NewHBox(
+					widget.NewButton("Изменить", func() {
+						if userRole != "common" {
+							openDialogWindowChangeComponent()
+						} else {
+							openDialogWindowError()
+						}
+					}),
+					widget.NewButton("Удалить", func() {
+						if userRole != "common" {
+							openDialogWindowConfirm("component", tci.Row)
+						} else {
+							openDialogWindowError()
+						}
+					}),
+				)
 			}
 		},
 	)
+
 	dataTable.UpdateHeader = func(id widget.TableCellID, template fyne.CanvasObject) {
 		label := template.(*widget.Label)
 		if id.Col == -1 {
@@ -115,7 +116,17 @@ func loadTabComponents() *fyne.Container {
 	dataTable.SetColumnWidth(3, 200)
 	dataTable.SetColumnWidth(4, 200)
 
-	box := container.NewHBox(widget.NewLabel("СПИСОК КОМПЛЕКТУЮЩИХ"), layout.NewSpacer(), widget.NewButton("Добавить комплеткующее", func() {}))
+	box := container.NewHBox(
+		widget.NewLabel("СПИСОК КОМПЛЕКТУЮЩИХ"),
+		layout.NewSpacer(),
+		widget.NewButton("Добавить комплеткующее", func() {
+			if userRole != "common" {
+				openDialogWindowAddComponent()
+			} else {
+				openDialogWindowError()
+			}
+		}),
+	)
 
 	container := layout.NewBorderLayout(box, buttonBack, nil, nil)
 
@@ -130,7 +141,7 @@ func loadTabComponents() *fyne.Container {
 }
 
 func loadTabCustomers() *fyne.Container {
-	customersList, err := database.GetCustomersList(connection)
+	customersList, err := database.GetCustomersList(conn)
 	if err != nil {
 		log.Println(err)
 	}
@@ -143,24 +154,7 @@ func loadTabCustomers() *fyne.Container {
 		func() fyne.CanvasObject {
 			return container.NewStack(
 				widget.NewLabel("data"),
-
-				container.NewHBox(
-					widget.NewButton("Изменить", func() {
-						if userRole != "common" {
-
-						} else {
-							openDialogWindow()
-						}
-					}),
-
-					widget.NewButton("Удалить", func() {
-						if userRole != "common" {
-
-						} else {
-							openDialogWindow()
-						}
-					}),
-				),
+				container.NewHBox(),
 			)
 		},
 
@@ -182,9 +176,27 @@ func loadTabCustomers() *fyne.Container {
 			} else if tci.Col == 5 {
 				label.Hide()
 				buttonsContainer.Show()
+
+				co.(*fyne.Container).Objects[1] = container.NewHBox(
+					widget.NewButton("Изменить", func() {
+						if userRole != "common" {
+							openDialogWindowChangeCustomer()
+						} else {
+							openDialogWindowError()
+						}
+					}),
+					widget.NewButton("Удалить", func() {
+						if userRole != "common" {
+							openDialogWindowConfirm("customer", tci.Row)
+						} else {
+							openDialogWindowError()
+						}
+					}),
+				)
 			}
 		},
 	)
+
 	dataTable.UpdateHeader = func(id widget.TableCellID, template fyne.CanvasObject) {
 		label := template.(*widget.Label)
 		if id.Col == -1 {
@@ -210,7 +222,17 @@ func loadTabCustomers() *fyne.Container {
 	dataTable.SetColumnWidth(4, 200)
 	dataTable.SetColumnWidth(5, 200)
 
-	box := container.NewHBox(widget.NewLabel("СПИСОК КЛИЕНТОВ"), layout.NewSpacer(), widget.NewButton("Добавить клиента", func() {}))
+	box := container.NewHBox(
+		widget.NewLabel("СПИСОК КЛИЕНТОВ"),
+		layout.NewSpacer(),
+		widget.NewButton("Добавить клиента", func() {
+			if userRole != "common" {
+				openDialogWindowAddCustomer()
+			} else {
+				openDialogWindowError()
+			}
+		}),
+	)
 
 	container := layout.NewBorderLayout(box, buttonBack, nil, nil)
 
@@ -225,7 +247,7 @@ func loadTabCustomers() *fyne.Container {
 }
 
 func loadTabSales() *fyne.Container {
-	salesList, err := database.GetSalesList(connection)
+	salesList, err := database.GetSalesList(conn)
 	if err != nil {
 		log.Println(err)
 	}
@@ -238,24 +260,7 @@ func loadTabSales() *fyne.Container {
 		func() fyne.CanvasObject {
 			return container.NewStack(
 				widget.NewLabel("data"),
-
-				container.NewHBox(
-					widget.NewButton("Изменить", func() {
-						if userRole != "common" {
-
-						} else {
-							openDialogWindow()
-						}
-					}),
-
-					widget.NewButton("Удалить", func() {
-						if userRole != "common" {
-
-						} else {
-							openDialogWindow()
-						}
-					}),
-				),
+				container.NewHBox(),
 			)
 		},
 
@@ -275,9 +280,27 @@ func loadTabSales() *fyne.Container {
 			} else if tci.Col == 4 {
 				label.Hide()
 				buttonsContainer.Show()
+
+				co.(*fyne.Container).Objects[1] = container.NewHBox(
+					widget.NewButton("Изменить", func() {
+						if userRole != "common" {
+							openDialogWindowChangeSale()
+						} else {
+							openDialogWindowError()
+						}
+					}),
+					widget.NewButton("Удалить", func() {
+						if userRole != "common" {
+							openDialogWindowConfirm("sale", tci.Row)
+						} else {
+							openDialogWindowError()
+						}
+					}),
+				)
 			}
 		},
 	)
+
 	dataTable.UpdateHeader = func(id widget.TableCellID, template fyne.CanvasObject) {
 		label := template.(*widget.Label)
 		if id.Col == -1 {
@@ -300,7 +323,17 @@ func loadTabSales() *fyne.Container {
 	dataTable.SetColumnWidth(3, 200)
 	dataTable.SetColumnWidth(4, 200)
 
-	box := container.NewHBox(widget.NewLabel("СПИСОК ПРОДАЖ"), layout.NewSpacer(), widget.NewButton("Добавить продажу", func() {}))
+	box := container.NewHBox(
+		widget.NewLabel("СПИСОК ПРОДАЖ"),
+		layout.NewSpacer(),
+		widget.NewButton("Добавить продажу", func() {
+			if userRole != "common" {
+				openDialogWindowAddSale()
+			} else {
+				openDialogWindowError()
+			}
+		}),
+	)
 
 	container := layout.NewBorderLayout(box, buttonBack, nil, nil)
 
