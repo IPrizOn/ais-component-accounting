@@ -77,7 +77,7 @@ func loadTabComponents() *fyne.Container {
 				co.(*fyne.Container).Objects[1] = container.NewHBox(
 					widget.NewButton("Изменить", func() {
 						if userRole != "common" {
-							openDialogWindowChangeComponent()
+							openDialogWindowEditComponent()
 						} else {
 							openDialogWindowError()
 						}
@@ -117,9 +117,9 @@ func loadTabComponents() *fyne.Container {
 	dataTable.SetColumnWidth(4, 200)
 
 	box := container.NewHBox(
-		widget.NewLabel("СПИСОК КОМПЛЕКТУЮЩИХ"),
+		widget.NewLabel("СПИСОК КОМПОНЕНТОВ"),
 		layout.NewSpacer(),
-		widget.NewButton("Добавить комплеткующее", func() {
+		widget.NewButton("Добавить компонент", func() {
 			if userRole != "common" {
 				openDialogWindowAddComponent()
 			} else {
@@ -180,7 +180,7 @@ func loadTabCustomers() *fyne.Container {
 				co.(*fyne.Container).Objects[1] = container.NewHBox(
 					widget.NewButton("Изменить", func() {
 						if userRole != "common" {
-							openDialogWindowChangeCustomer()
+							openDialogWindowEditCustomer()
 						} else {
 							openDialogWindowError()
 						}
@@ -284,7 +284,7 @@ func loadTabSales() *fyne.Container {
 				co.(*fyne.Container).Objects[1] = container.NewHBox(
 					widget.NewButton("Изменить", func() {
 						if userRole != "common" {
-							openDialogWindowChangeSale()
+							openDialogWindowEditSale()
 						} else {
 							openDialogWindowError()
 						}

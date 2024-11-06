@@ -7,7 +7,9 @@ import (
 )
 
 func UpdateComponent(conn *pgx.Conn) error {
-	query := ``
+	query := `UPDATE component 
+				SET type = $2, description = $3, price = $4
+					WHERE id = $1;`
 
 	_, err := conn.Exec(context.Background(), query)
 	if err != nil {
@@ -18,7 +20,9 @@ func UpdateComponent(conn *pgx.Conn) error {
 }
 
 func UpdateCustomer(conn *pgx.Conn) error {
-	query := ``
+	query := `UPDATE customer 
+				SET name = $2, phone = $3, email = $4, address = $5
+					WHERE id = $1;`
 
 	_, err := conn.Exec(context.Background(), query)
 	if err != nil {
@@ -29,7 +33,9 @@ func UpdateCustomer(conn *pgx.Conn) error {
 }
 
 func UpdateSale(conn *pgx.Conn) error {
-	query := ``
+	query := `UPDATE sale 
+				SET component_id = $2, customer_id = $3, count = $4 
+					WHERE id = $1;`
 
 	_, err := conn.Exec(context.Background(), query)
 	if err != nil {

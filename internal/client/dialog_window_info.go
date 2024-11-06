@@ -11,7 +11,7 @@ import (
 )
 
 func openDialogWindowError() {
-	windowDialog := AppFyne.NewWindow("Ошибка")
+	windowDialogInfo := AppFyne.NewWindow("Ошибка")
 
 	content := container.NewVBox(
 		container.NewHBox(
@@ -20,18 +20,18 @@ func openDialogWindowError() {
 			layout.NewSpacer(),
 		),
 		widget.NewButton("ОК", func() {
-			windowDialog.Close()
+			windowDialogInfo.Close()
 		}),
 	)
 
-	windowDialog.Resize(fyne.NewSize(250, 75))
-	windowDialog.CenterOnScreen()
-	windowDialog.SetContent(content)
-	windowDialog.Show()
+	windowDialogInfo.Resize(fyne.NewSize(250, 75))
+	windowDialogInfo.CenterOnScreen()
+	windowDialogInfo.SetContent(content)
+	windowDialogInfo.Show()
 }
 
 func openDialogWindowConfirm(selectedTab string, id int) {
-	windowDialog := AppFyne.NewWindow("Подтверждение")
+	windowDialogInfo := AppFyne.NewWindow("Подтверждение")
 
 	content := container.NewVBox(
 		container.NewHBox(
@@ -59,17 +59,17 @@ func openDialogWindowConfirm(selectedTab string, id int) {
 						log.Println(err)
 					}
 				}
-				windowDialog.Close()
+				windowDialogInfo.Close()
 			}),
 			widget.NewButton("Нет", func() {
-				windowDialog.Close()
+				windowDialogInfo.Close()
 			}),
 			layout.NewSpacer(),
 		),
 	)
 
-	windowDialog.Resize(fyne.NewSize(250, 75))
-	windowDialog.CenterOnScreen()
-	windowDialog.SetContent(content)
-	windowDialog.Show()
+	windowDialogInfo.Resize(fyne.NewSize(250, 75))
+	windowDialogInfo.CenterOnScreen()
+	windowDialogInfo.SetContent(content)
+	windowDialogInfo.Show()
 }
