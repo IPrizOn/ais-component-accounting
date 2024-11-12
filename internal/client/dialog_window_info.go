@@ -41,7 +41,7 @@ func openDialogWindowConfirm(selectedTab string, id int) {
 		),
 		container.NewHBox(
 			layout.NewSpacer(),
-			widget.NewButton("Да", func() {
+			widget.NewButton("  Да  ", func() {
 				switch selectedTab {
 				case "component":
 					err := database.DeleteComponent(conn, id)
@@ -61,7 +61,7 @@ func openDialogWindowConfirm(selectedTab string, id int) {
 				}
 				windowDialogInfo.Close()
 			}),
-			widget.NewButton("Нет", func() {
+			widget.NewButton(" Нет ", func() {
 				windowDialogInfo.Close()
 			}),
 			layout.NewSpacer(),

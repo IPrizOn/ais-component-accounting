@@ -42,7 +42,7 @@ func openDialogWindowEditComponent(id int, comp string, desc string, price int) 
 				}
 				windowDialogEdit.Close()
 			}),
-			widget.NewButton("Отмена", func() {
+			widget.NewButton("  Отмена  ", func() {
 				windowDialogEdit.Close()
 			}),
 			layout.NewSpacer(),
@@ -89,7 +89,7 @@ func openDialogWindowEditCustomer(id int, name string, phone string, email strin
 				}
 				windowDialogEdit.Close()
 			}),
-			widget.NewButton("Отмена", func() {
+			widget.NewButton("  Отмена  ", func() {
 				windowDialogEdit.Close()
 			}),
 			layout.NewSpacer(),
@@ -135,7 +135,7 @@ func openDialogWindowEditSale(id int, comp int, cust int, count int) {
 				}
 				windowDialogEdit.Close()
 			}),
-			widget.NewButton("Отмена", func() {
+			widget.NewButton("  Отмена  ", func() {
 				windowDialogEdit.Close()
 			}),
 			layout.NewSpacer(),

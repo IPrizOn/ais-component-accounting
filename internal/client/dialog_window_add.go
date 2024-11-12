@@ -52,7 +52,7 @@ func openDialogWindowAddComponent() {
 				}
 				windowDialogAdd.Close()
 			}),
-			widget.NewButton("Отмена", func() {
+			widget.NewButton("  Отмена  ", func() {
 				windowDialogAdd.Close()
 			}),
 			layout.NewSpacer(),
@@ -94,7 +94,7 @@ func openDialogWindowAddCustomer() {
 				}
 				windowDialogAdd.Close()
 			}),
-			widget.NewButton("Отмена", func() {
+			widget.NewButton("  Отмена  ", func() {
 				windowDialogAdd.Close()
 			}),
 			layout.NewSpacer(),
@@ -137,7 +137,7 @@ func openDialogWindowAddSale() {
 				}
 				windowDialogAdd.Close()
 			}),
-			widget.NewButton("Отмена", func() {
+			widget.NewButton("  Отмена  ", func() {
 				windowDialogAdd.Close()
 			}),
 			layout.NewSpacer(),

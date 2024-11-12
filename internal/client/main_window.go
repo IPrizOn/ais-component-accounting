@@ -84,7 +84,7 @@ func loadTabComponents() *fyne.Container {
 					}),
 					widget.NewButton("Удалить", func() {
 						if userRole != "common" {
-							openDialogWindowConfirm("component", tci.Row)
+							openDialogWindowConfirm("component", componentsList[tci.Row].ID)
 						} else {
 							openDialogWindowError()
 						}
@@ -187,7 +187,7 @@ func loadTabCustomers() *fyne.Container {
 					}),
 					widget.NewButton("Удалить", func() {
 						if userRole != "common" {
-							openDialogWindowConfirm("customer", tci.Row)
+							openDialogWindowConfirm("customer", customersList[tci.Row].ID)
 						} else {
 							openDialogWindowError()
 						}
@@ -291,7 +291,7 @@ func loadTabSales() *fyne.Container {
 					}),
 					widget.NewButton("Удалить", func() {
 						if userRole != "common" {
-							openDialogWindowConfirm("sale", tci.Row)
+							openDialogWindowConfirm("sale", salesList[tci.Row].ID)
 						} else {
 							openDialogWindowError()
 						}
