@@ -3,6 +3,7 @@ package client
 import (
 	"ais/internal/database"
 	"log"
+	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -10,14 +11,22 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func openDialogWindowEditComponent() {
+func openDialogWindowEditComponent(id int, comp string, desc string, price int) {
 	windowDialogEdit := AppFyne.NewWindow("Изменение компонента")
 
+	entry1 := widget.NewEntry()
+	entry2 := widget.NewEntry()
+	entry3 := widget.NewEntry()
+
 	form := widget.NewForm(
-		widget.NewFormItem("Компонент", widget.NewEntry()),
-		widget.NewFormItem("Описание", widget.NewEntry()),
-		widget.NewFormItem("Цена", widget.NewEntry()),
+		widget.NewFormItem("Компонент", entry1),
+		widget.NewFormItem("Описание", entry2),
+		widget.NewFormItem("Цена", entry3),
 	)
+
+	entry1.SetText(comp)
+	entry2.SetText(desc)
+	entry3.SetText(strconv.Itoa(price))
 
 	content := container.NewVBox(
 		layout.NewSpacer(),
@@ -26,10 +35,12 @@ func openDialogWindowEditComponent() {
 		container.NewHBox(
 			layout.NewSpacer(),
 			widget.NewButton("Изменить", func() {
-				err := database.UpdateComponent(conn)
+				thisPrice, _ := strconv.Atoi(entry3.Text)
+				err := database.UpdateComponent(conn, id, entry1.Text, entry2.Text, thisPrice)
 				if err != nil {
 					log.Println(err)
 				}
+				windowDialogEdit.Close()
 			}),
 			widget.NewButton("Отмена", func() {
 				windowDialogEdit.Close()
@@ -45,15 +56,25 @@ func openDialogWindowEditComponent() {
 	windowDialogEdit.Show()
 }
 
-func openDialogWindowEditCustomer() {
+func openDialogWindowEditCustomer(id int, name string, phone string, email string, address string) {
 	windowDialogEdit := AppFyne.NewWindow("Изменение клиента")
 
+	entry1 := widget.NewEntry()
+	entry2 := widget.NewEntry()
+	entry3 := widget.NewEntry()
+	entry4 := widget.NewEntry()
+
 	form := widget.NewForm(
-		widget.NewFormItem("Имя", widget.NewEntry()),
-		widget.NewFormItem("Телефон", widget.NewEntry()),
-		widget.NewFormItem("Почта", widget.NewEntry()),
-		widget.NewFormItem("Адрес", widget.NewEntry()),
+		widget.NewFormItem("Имя", entry1),
+		widget.NewFormItem("Телефон", entry2),
+		widget.NewFormItem("Почта", entry3),
+		widget.NewFormItem("Адрес", entry4),
 	)
+
+	entry1.SetText(name)
+	entry2.SetText(phone)
+	entry3.SetText(email)
+	entry4.SetText(address)
 
 	content := container.NewVBox(
 		layout.NewSpacer(),
@@ -62,10 +83,11 @@ func openDialogWindowEditCustomer() {
 		container.NewHBox(
 			layout.NewSpacer(),
 			widget.NewButton("Изменить", func() {
-				err := database.UpdateComponent(conn)
+				err := database.UpdateCustomer(conn, id, entry1.Text, entry2.Text, entry3.Text, entry4.Text)
 				if err != nil {
 					log.Println(err)
 				}
+				windowDialogEdit.Close()
 			}),
 			widget.NewButton("Отмена", func() {
 				windowDialogEdit.Close()
@@ -81,14 +103,22 @@ func openDialogWindowEditCustomer() {
 	windowDialogEdit.Show()
 }
 
-func openDialogWindowEditSale() {
+func openDialogWindowEditSale(id int, comp int, cust int, count int) {
 	windowDialogEdit := AppFyne.NewWindow("Изменение продажи")
 
+	entry1 := widget.NewEntry()
+	entry2 := widget.NewEntry()
+	entry3 := widget.NewEntry()
+
 	form := widget.NewForm(
-		widget.NewFormItem("Компонент", widget.NewEntry()),
-		widget.NewFormItem("Клиент", widget.NewEntry()),
-		widget.NewFormItem("Количество", widget.NewEntry()),
+		widget.NewFormItem("Компонент", entry1),
+		widget.NewFormItem("Клиент", entry2),
+		widget.NewFormItem("Количество", entry3),
 	)
+
+	entry1.SetText(strconv.Itoa(comp))
+	entry2.SetText(strconv.Itoa(cust))
+	entry3.SetText(strconv.Itoa(count))
 
 	content := container.NewVBox(
 		layout.NewSpacer(),
@@ -96,10 +126,14 @@ func openDialogWindowEditSale() {
 		container.NewHBox(
 			layout.NewSpacer(),
 			widget.NewButton("Изменить", func() {
-				err := database.UpdateComponent(conn)
+				compID, _ := strconv.Atoi(entry1.Text)
+				custID, _ := strconv.Atoi(entry2.Text)
+				thisCount, _ := strconv.Atoi(entry3.Text)
+				err := database.UpdateSale(conn, id, compID, custID, thisCount)
 				if err != nil {
 					log.Println(err)
 				}
+				windowDialogEdit.Close()
 			}),
 			widget.NewButton("Отмена", func() {
 				windowDialogEdit.Close()

@@ -3,6 +3,7 @@ package client
 import (
 	"ais/internal/database"
 	"log"
+	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -13,10 +14,28 @@ import (
 func openDialogWindowAddComponent() {
 	windowDialogAdd := AppFyne.NewWindow("Добавление компонента")
 
+	entry1 := widget.NewEntry()
+	entry2 := widget.NewEntry()
+	selecter := widget.NewSelect(
+		[]string{
+			"processor",
+			"motherboard",
+			"video_card",
+			"ram",
+			"disk",
+			"power_unit",
+			"frame",
+		},
+
+		func(s string) {
+
+		},
+	)
+
 	form := widget.NewForm(
-		widget.NewFormItem("Компонент", widget.NewEntry()),
-		widget.NewFormItem("Описание", widget.NewEntry()),
-		widget.NewFormItem("Цена", widget.NewEntry()),
+		widget.NewFormItem("Компонент", selecter),
+		widget.NewFormItem("Описание", entry1),
+		widget.NewFormItem("Цена", entry2),
 	)
 
 	content := container.NewVBox(
@@ -26,10 +45,12 @@ func openDialogWindowAddComponent() {
 		container.NewHBox(
 			layout.NewSpacer(),
 			widget.NewButton("Добавить", func() {
-				err := database.CreateComponent(conn)
+				price, _ := strconv.Atoi(entry2.Text)
+				err := database.CreateComponent(conn, selecter.Selected, entry1.Text, price)
 				if err != nil {
 					log.Println(err)
 				}
+				windowDialogAdd.Close()
 			}),
 			widget.NewButton("Отмена", func() {
 				windowDialogAdd.Close()
@@ -48,11 +69,16 @@ func openDialogWindowAddComponent() {
 func openDialogWindowAddCustomer() {
 	windowDialogAdd := AppFyne.NewWindow("Добавление клиента")
 
+	entry1 := widget.NewEntry()
+	entry2 := widget.NewEntry()
+	entry3 := widget.NewEntry()
+	entry4 := widget.NewEntry()
+
 	form := widget.NewForm(
-		widget.NewFormItem("Имя", widget.NewEntry()),
-		widget.NewFormItem("Телефон", widget.NewEntry()),
-		widget.NewFormItem("Почта", widget.NewEntry()),
-		widget.NewFormItem("Адрес", widget.NewEntry()),
+		widget.NewFormItem("Имя", entry1),
+		widget.NewFormItem("Телефон", entry2),
+		widget.NewFormItem("Почта", entry3),
+		widget.NewFormItem("Адрес", entry4),
 	)
 
 	content := container.NewVBox(
@@ -62,10 +88,11 @@ func openDialogWindowAddCustomer() {
 		container.NewHBox(
 			layout.NewSpacer(),
 			widget.NewButton("Добавить", func() {
-				err := database.CreateComponent(conn)
+				err := database.CreateCustomer(conn, entry1.Text, entry2.Text, entry3.Text, entry4.Text)
 				if err != nil {
 					log.Println(err)
 				}
+				windowDialogAdd.Close()
 			}),
 			widget.NewButton("Отмена", func() {
 				windowDialogAdd.Close()
@@ -84,10 +111,14 @@ func openDialogWindowAddCustomer() {
 func openDialogWindowAddSale() {
 	windowDialogAdd := AppFyne.NewWindow("Добавление продажи")
 
+	entry1 := widget.NewEntry()
+	entry2 := widget.NewEntry()
+	entry3 := widget.NewEntry()
+
 	form := widget.NewForm(
-		widget.NewFormItem("Компонент", widget.NewEntry()),
-		widget.NewFormItem("Клиент", widget.NewEntry()),
-		widget.NewFormItem("Количество", widget.NewEntry()),
+		widget.NewFormItem("Клиент", entry1),
+		widget.NewFormItem("Компонент", entry2),
+		widget.NewFormItem("Количество", entry3),
 	)
 
 	content := container.NewVBox(
@@ -97,10 +128,14 @@ func openDialogWindowAddSale() {
 		container.NewHBox(
 			layout.NewSpacer(),
 			widget.NewButton("Добавить", func() {
-				err := database.CreateComponent(conn)
+				compID, _ := strconv.Atoi(entry1.Text)
+				custID, _ := strconv.Atoi(entry2.Text)
+				count, _ := strconv.Atoi(entry3.Text)
+				err := database.CreateSale(conn, compID, custID, count)
 				if err != nil {
 					log.Println(err)
 				}
+				windowDialogAdd.Close()
 			}),
 			widget.NewButton("Отмена", func() {
 				windowDialogAdd.Close()

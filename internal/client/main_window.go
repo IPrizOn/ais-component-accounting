@@ -77,7 +77,7 @@ func loadTabComponents() *fyne.Container {
 				co.(*fyne.Container).Objects[1] = container.NewHBox(
 					widget.NewButton("Изменить", func() {
 						if userRole != "common" {
-							openDialogWindowEditComponent()
+							openDialogWindowEditComponent(componentsList[tci.Row].ID, componentsList[tci.Row].Type, componentsList[tci.Row].Description, componentsList[tci.Row].Price)
 						} else {
 							openDialogWindowError()
 						}
@@ -180,7 +180,7 @@ func loadTabCustomers() *fyne.Container {
 				co.(*fyne.Container).Objects[1] = container.NewHBox(
 					widget.NewButton("Изменить", func() {
 						if userRole != "common" {
-							openDialogWindowEditCustomer()
+							openDialogWindowEditCustomer(customersList[tci.Row].ID, customersList[tci.Row].Name, customersList[tci.Row].Phone, customersList[tci.Row].Email, customersList[tci.Row].Address)
 						} else {
 							openDialogWindowError()
 						}
@@ -284,7 +284,7 @@ func loadTabSales() *fyne.Container {
 				co.(*fyne.Container).Objects[1] = container.NewHBox(
 					widget.NewButton("Изменить", func() {
 						if userRole != "common" {
-							openDialogWindowEditSale()
+							openDialogWindowEditSale(salesList[tci.Row].ID, salesList[tci.Row].ComponentID, salesList[tci.Row].CustomerID, salesList[tci.Row].Count)
 						} else {
 							openDialogWindowError()
 						}
