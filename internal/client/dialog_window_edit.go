@@ -41,6 +41,7 @@ func openDialogWindowEditComponent(id int, comp string, desc string, price int) 
 					log.Println(err)
 				}
 				windowDialogEdit.Close()
+				openWindowMain()
 			}),
 			widget.NewButton("  Отмена  ", func() {
 				windowDialogEdit.Close()
@@ -88,6 +89,7 @@ func openDialogWindowEditCustomer(id int, name string, phone string, email strin
 					log.Println(err)
 				}
 				windowDialogEdit.Close()
+				openWindowMain()
 			}),
 			widget.NewButton("  Отмена  ", func() {
 				windowDialogEdit.Close()
@@ -134,6 +136,7 @@ func openDialogWindowEditSale(id int, comp int, cust int, count int) {
 					log.Println(err)
 				}
 				windowDialogEdit.Close()
+				openWindowMain()
 			}),
 			widget.NewButton("  Отмена  ", func() {
 				windowDialogEdit.Close()

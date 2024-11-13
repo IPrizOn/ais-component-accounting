@@ -51,6 +51,7 @@ func openDialogWindowAddComponent() {
 					log.Println(err)
 				}
 				windowDialogAdd.Close()
+				openWindowMain()
 			}),
 			widget.NewButton("  Отмена  ", func() {
 				windowDialogAdd.Close()
@@ -93,6 +94,7 @@ func openDialogWindowAddCustomer() {
 					log.Println(err)
 				}
 				windowDialogAdd.Close()
+				openWindowMain()
 			}),
 			widget.NewButton("  Отмена  ", func() {
 				windowDialogAdd.Close()
@@ -136,6 +138,7 @@ func openDialogWindowAddSale() {
 					log.Println(err)
 				}
 				windowDialogAdd.Close()
+				openWindowMain()
 			}),
 			widget.NewButton("  Отмена  ", func() {
 				windowDialogAdd.Close()

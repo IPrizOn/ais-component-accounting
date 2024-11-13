@@ -60,6 +60,7 @@ func openDialogWindowConfirm(selectedTab string, id int) {
 					}
 				}
 				windowDialogInfo.Close()
+				openWindowMain()
 			}),
 			widget.NewButton(" Нет ", func() {
 				windowDialogInfo.Close()

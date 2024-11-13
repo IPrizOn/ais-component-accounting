@@ -23,7 +23,6 @@ func openWindowAuth() {
 	if err != nil {
 		log.Println(err)
 	}
-	clear(usersList)
 
 	windowMain.SetTitle("Авторизация")
 
@@ -68,13 +67,11 @@ func loadContent() *fyne.Container {
 }
 
 func isAuth(login string, password string) bool {
-	if login == "admin" && password == "12345" {
-		userRole = "admin"
-
+	if login == usersList[0].Login && password == usersList[0].Password {
+		userRole = usersList[0].Role
 		return true
-	} else if login == "user" && password == "1111" {
-		userRole = "common"
-
+	} else if login == usersList[1].Login && password == usersList[1].Password {
+		userRole = usersList[1].Role
 		return true
 	}
 
