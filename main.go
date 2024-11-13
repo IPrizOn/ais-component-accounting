@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ais/internal/client"
+	"ais/client"
 	"context"
 	"log"
 	"sync"

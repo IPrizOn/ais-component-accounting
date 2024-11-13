@@ -1,7 +1,7 @@
 package client
 
 import (
-	"ais/internal/database"
+	"ais/database"
 	"log"
 	"strconv"
 

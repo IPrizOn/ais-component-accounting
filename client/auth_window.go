@@ -1,8 +1,8 @@
 package client
 
 import (
-	"ais/internal/database"
-	"ais/internal/domain"
+	"ais/database"
+	"ais/domain"
 	"log"
 
 	"fyne.io/fyne/v2"

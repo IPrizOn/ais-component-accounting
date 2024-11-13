@@ -1,7 +1,7 @@
 package database
 
 import (
-	"ais/internal/domain"
+	"ais/domain"
 	"context"
 
 	"github.com/jackc/pgx/v5"
